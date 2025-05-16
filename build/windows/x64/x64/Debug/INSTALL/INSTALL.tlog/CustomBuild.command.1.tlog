@@ -1,0 +1,10 @@
+^F:\ALBARAKAH\STATE MANAGMENT\INTRO_TO_PROVIDER_AND_STREAMING\BUILD\WINDOWS\X64\CMAKEFILES\ADBE40E09573DDDCC2336FFC449A7007\INSTALL_FORCE.RULE
+setlocal
+cd .
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

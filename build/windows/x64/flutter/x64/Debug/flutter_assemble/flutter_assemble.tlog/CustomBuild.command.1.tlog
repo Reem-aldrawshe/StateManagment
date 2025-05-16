@@ -1,0 +1,28 @@
+^F:\ALBARAKAH\STATE MANAGMENT\INTRO_TO_PROVIDER_AND_STREAMING\BUILD\WINDOWS\X64\CMAKEFILES\D52428F4F7BCEA6C28E645807DB8A515\FLUTTER_WINDOWS.DLL.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" -E env FLUTTER_ROOT=C:\src\flutter "PROJECT_DIR=F:\albarakah\state managment\intro_to_provider_and_streaming" FLUTTER_ROOT=C:\src\flutter "FLUTTER_EPHEMERAL_DIR=F:\albarakah\state managment\intro_to_provider_and_streaming\windows\flutter\ephemeral" "PROJECT_DIR=F:\albarakah\state managment\intro_to_provider_and_streaming" "FLUTTER_TARGET=F:\albarakah\state managment\intro_to_provider_and_streaming\lib\main.dart" DART_DEFINES=RkxVVFRFUl9XRUJfQ0FOVkFTS0lUX1VSTD1odHRwczovL3d3dy5nc3RhdGljLmNvbS9mbHV0dGVyLWNhbnZhc2tpdC8yMzVkYjkxMWJhMjc5NzIyZjVlNjg1ZjM4YjBlZDMwZmE3ZTg1NzBhLw== DART_OBFUSCATION=false TRACK_WIDGET_CREATION=true TREE_SHAKE_ICONS=false "PACKAGE_CONFIG=F:\albarakah\state managment\intro_to_provider_and_streaming\.dart_tool\package_config.json" C:/src/flutter/packages/flutter_tools/bin/tool_backend.bat windows-x64 Debug
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\ALBARAKAH\STATE MANAGMENT\INTRO_TO_PROVIDER_AND_STREAMING\BUILD\WINDOWS\X64\CMAKEFILES\CD4AAA9854ECF6F1652F7A6300102246\FLUTTER_ASSEMBLE.RULE
+setlocal
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
+^F:\ALBARAKAH\STATE MANAGMENT\INTRO_TO_PROVIDER_AND_STREAMING\WINDOWS\FLUTTER\CMAKELISTS.TXT
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SF:/albarakah/state managment/intro_to_provider_and_streaming/windows" "-BF:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64" --check-stamp-file "F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/flutter/CMakeFiles/generate.stamp"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

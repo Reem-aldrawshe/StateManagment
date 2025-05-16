@@ -1,0 +1,1 @@
+ F:\\albarakah\\state\ managment\\intro_to_provider_and_streaming\\.dart_tool\\flutter_build\\5a4f954929af724c8dfd0669505e9f54\\native_assets.yaml: 

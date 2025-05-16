@@ -1,0 +1,10 @@
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/icudtl.dat
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/flutter_windows.dll
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.bin
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/AssetManifest.json
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/FontManifest.json
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/fonts/MaterialIcons-Regular.otf
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/kernel_blob.bin
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/NOTICES.Z
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/packages/cupertino_icons/assets/CupertinoIcons.ttf
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/Debug/data/flutter_assets/shaders/ink_sparkle.frag

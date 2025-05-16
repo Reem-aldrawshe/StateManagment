@@ -1,0 +1,10 @@
+^F:\ALBARAKAH\STATE MANAGMENT\INTRO_TO_PROVIDER_AND_STREAMING\BUILD\WINDOWS\X64\CMAKEFILES\ADBE40E09573DDDCC2336FFC449A7007\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin\cmake.exe" "-SF:/albarakah/state managment/intro_to_provider_and_streaming/windows" "-BF:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/provider_concept.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

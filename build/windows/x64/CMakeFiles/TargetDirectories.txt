@@ -1,0 +1,10 @@
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/CMakeFiles/INSTALL.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/CMakeFiles/ALL_BUILD.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/CMakeFiles/ZERO_CHECK.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/flutter/CMakeFiles/flutter_wrapper_app.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/flutter/CMakeFiles/flutter_assemble.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/flutter/CMakeFiles/INSTALL.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/CMakeFiles/provider_concept.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/CMakeFiles/INSTALL.dir
+F:/albarakah/state managment/intro_to_provider_and_streaming/build/windows/x64/runner/CMakeFiles/ALL_BUILD.dir
