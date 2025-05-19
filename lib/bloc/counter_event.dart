@@ -14,7 +14,3 @@ class SetTheNumberFromTextField extends CounterEvent {
     required this.theNumber,
   });
 }
-
-//class Restart extends CounterEvent {}
-
-

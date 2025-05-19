@@ -1,133 +1,153 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:intro_to_bloc2/bloc/counter_event.dart';
-import 'package:intro_to_bloc2/bloc/counter_manager.dart';
-import 'package:intro_to_bloc2/bloc/counter_state.dart';
+import 'package:intro_to_bloc2/app/bloc/auth_bloc.dart';
+import 'package:intro_to_bloc2/auth/bloc/login_bloc.dart';
+import 'package:intro_to_bloc2/config.dart';
+import 'package:intro_to_bloc2/model/user_model.dart';
+import 'package:intro_to_bloc2/view/prev_session.dart';
 
 void main() {
-  runApp(const MyApp());
-  tickTrick(B());
+  Bloc.observer = MyBlocObserver();
+  runApp(const App());
+  // tickTrick(B());
 }
 
-class A extends C {
-  //  super.name= "Hello";
-}
-
-class B extends C {
-  //  super.name = 30;
-}
-
-class C {
-  dynamic name;
-}
-
-tickTrick(C c) {
-  print(c);
-}
-
-printer(data) {
-  if (data is String) {
-    print(data);
-  }
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class App extends StatelessWidget {
+  const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: HomePage());
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(
+          create: (context) {
+            final authBloc = AuthBloc();
+            authBloc.add(CheckUserAuthStatus());
+            return authBloc;
+          },
+        ),
+      ],
+      child: MaterialApp(
+        home: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            if (state is UserAuthorized) {
+              return HomePage();
+            } else {
+              return LogInPage();
+            }
+          },
+        ),
+      ),
+    );
   }
 }
 
-class HomePage extends StatelessWidget {
-  HomePage({super.key});
+class LogInPage extends StatelessWidget {
+  LogInPage({super.key});
 
-  TextEditingController setter = TextEditingController();
+  TextEditingController username = TextEditingController();
 
+  TextEditingController password = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CounterManager(),
-      child: Builder(
-        builder: (context) {
-          return Scaffold(
-            appBar: AppBar(
-              actions: [
-                IconButton(
-                  onPressed: () {
-                    context.read<CounterManager>().add(Restore());
-                  },
-                  icon: Icon(Icons.exposure_zero),
+    return Scaffold(
+      body: Center(
+        child: Container(
+          width: 400,
+          height: 600,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.grey.shade200,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: username,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    context.read<CounterManager>().add(Decreament());
-                  },
-                  icon: Icon(Icons.minimize),
-                ),
-                IconButton(
-                  onPressed: () {
-                    context.read<CounterManager>().add(
-                          SetTheNumberFromTextField(theNumber: setter.text),
-                        );
-                  },
-                  icon: Icon(Icons.set_meal),
-                ),
-              ],
-              title: TextField(
-                controller: setter,
-                decoration: InputDecoration(border: OutlineInputBorder()),
               ),
-            ),
-            body: Center(
-              child: BlocBuilder<CounterManager, CounterState>(
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 300,
+                  child: TextField(
+                    controller: password,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              BlocConsumer<LoginBloc, LoginState>(
+                listener: (context, state) {
+                  if (state is FailedToLogin) {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text("Please Try Again")));
+                  }
+                  if (state is SuccessToLogin) {
+                    context.read<AuthBloc>().add(UserSaved());
+                  }
+                },
                 builder: (context, state) {
-                  print(state);
-                  if (state is TheNumberHasBeenChange) {
-                    return Text(
-                      state.counter.toString(),
-                      style: TextStyle(fontSize: 32),
-                    );
-                  } else if (state is RestoreToZero) {
-                    return Text(
-                      state.counter.toString(),
-                      style: TextStyle(fontSize: 32),
-                    );
-                  } else if (state is UserInputAlphabetToCounter) {
-                    return Text(
-                      state.counter.toString(),
-                      style: TextStyle(fontSize: 32),
+                  if (state is Loading) {
+                    return Container(
+                      margin: EdgeInsets.all(20),
+                      width: 220,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Colors.orange.shade300,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Center(child: CircularProgressIndicator()),
                     );
                   } else {
-                    return LinearProgressIndicator();
+                    return InkWell(
+                      onTap: () {
+                        context.read<LoginBloc>().add(
+                              TryLogIn(
+                                user: UserModel(
+                                  usename: username.text,
+                                  password: password.text,
+                                ),
+                              ),
+                            );
+                      },
+                      child: Container(
+                        margin: EdgeInsets.all(20),
+                        width: 220,
+                        height: 55,
+                        decoration: BoxDecoration(
+                          color: Colors.orange.shade300,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "Log In",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    );
                   }
                 },
               ),
-            ),
-            floatingActionButton: BlocListener<CounterManager, CounterState>(
-              listener: (context, state) {
-                if (state is UserInputAlphabetToCounter) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(
-                      "القيمة لح تضل نفسها لانك مدخل حروف",
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    backgroundColor: Colors.red,
-                  ));
-                  return setter.clear();
-                } else if (state is TheNumberHasBeenChange) {
-                  setter.clear();
-                }
-              },
-              child: FloatingActionButton(
-                onPressed: () {
-                  context.read<CounterManager>().add(Increament());
-                },
-              ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }
