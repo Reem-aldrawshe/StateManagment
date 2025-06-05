@@ -1,57 +1,26 @@
-abstract class AuthEvent {}
+import 'package:equatable/equatable.dart';
+import 'package:water_delivery/model/auth_model.dart';
+import 'package:water_delivery/model/user_model.dart';
 
-class LoginEvent extends AuthEvent {
-  final String email;
-  final String password;
-
-  LoginEvent({required this.email, required this.password});
+abstract class AuthEvent extends Equatable {
+  @override
+  List<Object?> get props => [];
 }
 
 class RegisterEvent extends AuthEvent {
-  final String username;
-  final String email;
-  final String password;
+  final AuthModel user;
 
-  RegisterEvent({
-    required this.username,
-    required this.email,
-    required this.password,
-  });
+  RegisterEvent(this.user);
+
+  @override
+  List<Object?> get props => [user];
 }
 
+class LoginEvent extends AuthEvent {
+  final LoginModel loginUser;
 
-// import 'package:equatable/equatable.dart';
+  LoginEvent(this.loginUser);
 
-// abstract class AuthEvent extends Equatable {
-//   @override
-//   List<Object> get props => [];
-// }
-
-// // تسجيل جديد
-// class RegisterEvent extends AuthEvent {
-//   final String email;
-//   final String username;
-//   final String role;
-//   final String password;
-
-//   RegisterEvent({
-//     required this.email,
-//     required this.username,
-//     required this.role,
-//     required this.password,
-//   });
-
-//   @override
-//   List<Object> get props => [email, username, role, password];
-// }
-
-// // تسجيل دخول
-// class LoginEvent extends AuthEvent {
-//   final String email;
-//   final String password;
-
-//   LoginEvent({required this.email, required this.password});
-
-//   @override
-//   List<Object> get props => [email, password];
-// }
+  @override
+  List<Object?> get props => [loginUser];
+}

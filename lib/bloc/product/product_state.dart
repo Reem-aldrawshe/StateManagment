@@ -1,26 +1,40 @@
-import 'package:water_delivery/model/company_model.dart';
-import 'package:water_delivery/model/offer_model.dart';
+import 'package:equatable/equatable.dart';
+import '../../model/offer_model.dart';
+import '../../model/company_model.dart';
 
-abstract class ProductState {}
+abstract class ProductState extends Equatable {
+  const ProductState();
+
+  @override
+  List<Object?> get props => [];
+}
 
 class ProductInitial extends ProductState {}
 
 class ProductLoading extends ProductState {}
 
 class ProductLoaded extends ProductState {
+  final List<OfferModel> allOffers;
+  final List<OfferModel> filteredOffers;
   final List<CompanyModel> companies;
-  final List<OfferModel> offers;
-  final int selectedCompanyId;
+  final String selectedCompanyId;
 
-  ProductLoaded({
+  const ProductLoaded({
+    required this.allOffers,
+    required this.filteredOffers,
     required this.companies,
-    required this.offers,
     required this.selectedCompanyId,
   });
+
+  @override
+  List<Object?> get props => [allOffers, filteredOffers, companies, selectedCompanyId];
 }
 
 class ProductError extends ProductState {
   final String message;
 
-  ProductError({required this.message});
+  const ProductError(this.message);
+
+  @override
+  List<Object?> get props => [message];
 }

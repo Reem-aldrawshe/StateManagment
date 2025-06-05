@@ -1,73 +1,49 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:water_delivery/bloc/auth/auth_event.dart';
-import 'package:water_delivery/bloc/auth/auth_state.dart';
+import 'auth_event.dart';
+import 'auth_state.dart';
 import 'package:water_delivery/service/auth_service.dart';
+import 'package:water_delivery/service/user_service.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
-  final AuthService authService;
+  final AuthService _authService;
+  final UserService _userService;
 
-  AuthBloc(this.authService) : super(AuthInitial()) {
-    // تسجيل الدخول
-    on<LoginEvent>((event, emit) async {
-      emit(AuthLoading());
-      final success = await authService.login(event.email, event.password);
-      if (success) {
-        emit(AuthSuccess());
-      } else {
-        emit(AuthFailure(message: 'فشل تسجيل الدخول'));
-      }
-    });
+  AuthBloc(this._authService, this._userService,) : super(AuthInitial()) {
+    on<RegisterEvent>(_onRegister);
+    on<LoginEvent>(_onLogin); 
+  }
 
-    // التسجيل
-    on<RegisterEvent>((event, emit) async {
-      emit(AuthLoading());
-      final success = await authService.register(
-        event.username,
-        event.email,
-        event.password,
-      );
-      if (success) {
-        emit(AuthRegistered());
+  Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      await _authService.register(event.user);
+      emit(AuthSuccess('Registration successful!'));
+    } catch (e) {
+      print('Registration Error: ${e.toString()}');
+      emit(AuthFailure(e.toString()));
+    }
+  }
+
+  Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
+    emit(AuthLoading());
+    try {
+      final loginData = await _userService.loginUser(event.loginUser);
+
+      final token = loginData['access_token']; 
+      final username = loginData['username'] ?? '';
+      final role = loginData['role'] ?? '';
+
+      if (token != null) {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setString('token', token);
+
+        emit(AuthSuccess('Login successful!\nUser: $username\nRole: $role'));
       } else {
-        emit(AuthFailure(message: 'فشل إنشاء الحساب'));
+        emit(AuthFailure('Login failed: Token not found'));
       }
-    });
+    } catch (e) {
+      emit(AuthFailure('Login failed: ${e.toString()}'));
+    }
   }
 }
-
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:water_delivery/model/login_model.dart';
-// import 'package:water_delivery/service/auth_service.dart';
-// import 'auth_event.dart';
-// import 'auth_state.dart';
-
-// class AuthBloc extends Bloc<AuthEvent, AuthState> {
-//   final AuthService authService;
-
-//   AuthBloc({required this.authService}) : super(AuthInitial()) {
-//     // تسجيل جديد
-//     on<RegisterEvent>((event, emit) async {
-//       emit(AuthLoading());
-//       try {
-//         final model = AuthModel(
-//           email: event.email,
-//           username: event.username,
-//           role: event.role,
-//           password: event.password,
-//         );
-//         await authService.register(model);
-//         emit(AuthSuccess(message: "Account created successfully"));
-//       } catch (e) {
-//         emit(AuthFailure(message: "Registration failed: ${e.toString()}"));
-//       }
-//     });
-
-//     // تسجيل دخول (مؤقتًا بنخليها فارغة، نكمل لاحقًا)
-//     on<LoginEvent>((event, emit) async {
-//       emit(AuthLoading());
-//       await Future.delayed(Duration(seconds: 1));
-//       emit(AuthFailure(message: 'Login not yet implemented'));
-//     });
-//   }
-// }

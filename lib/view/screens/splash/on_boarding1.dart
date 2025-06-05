@@ -12,35 +12,35 @@ class OnBoarding1 extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 21, vertical: 13),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "9:41",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.signal_cellular_alt, color: Colors.black, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.wifi, color: Colors.black, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.battery_full, color: Colors.black, size: 20),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 21, vertical: 13),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text(
+            //             "9:41",
+            //             style: TextStyle(
+            //               color: Colors.black,
+            //               fontSize: 15,
+            //               fontWeight: FontWeight.w600,
+            //             ),
+            //           ),
+            //           Row(
+            //             children: [
+            //               Icon(Icons.signal_cellular_alt, color: Colors.black, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.wifi, color: Colors.black, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.battery_full, color: Colors.black, size: 20),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
 
             Expanded(
               child: Column(
@@ -116,11 +116,11 @@ class OnBoarding1 extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: responsive(context, 28),
-                vertical: 16,
+                vertical:responsive(context, 16),
               ),
               child: SizedBox(
                   width: responsive(context, 318),
-                  height: 60,
+                  height: responsive(context, 60),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xff5DCCFC),

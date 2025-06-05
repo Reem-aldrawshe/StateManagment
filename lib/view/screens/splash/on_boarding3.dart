@@ -12,43 +12,43 @@ class OnBoarding3 extends StatelessWidget {
       body: SafeArea(
         child: Column(
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 21, vertical: 13),
-              child: Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "9:41",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      Row(
-                        children: [
-                          Icon(Icons.signal_cellular_alt, color: Colors.black, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.wifi, color: Colors.black, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.battery_full, color: Colors.black, size: 20),
-                        ],
-                      ),
-                    ],
-                  ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 21, vertical: 13),
+            //   child: Column(
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text(
+            //             "9:41",
+            //             style: TextStyle(
+            //               color: Colors.black,
+            //               fontSize: 15,
+            //               fontWeight: FontWeight.w600,
+            //             ),
+            //           ),
+            //           Row(
+            //             children: [
+            //               Icon(Icons.signal_cellular_alt, color: Colors.black, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.wifi, color: Colors.black, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.battery_full, color: Colors.black, size: 20),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
 
-                  SizedBox(height: 12),
+            //       SizedBox(height: 12),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Icon(Icons.arrow_back, color: Color(0xff3FBDF1)),
                     ],
                   ),
-                ],
-              ),
-            ),
+            //     ],
+            //   ),
+            // ),
 
             Expanded(
               child: Column(

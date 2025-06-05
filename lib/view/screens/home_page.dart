@@ -1,7 +1,7 @@
+import 'dart:ffi';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:water_delivery/bloc/login/login_bloc.dart';
-import 'package:water_delivery/service/auth_service.dart';
+import 'package:water_delivery/bloc/auth/auth_bloc.dart';
 import 'package:water_delivery/utils/responsive.dart';
 import 'package:water_delivery/view/screens/login_page.dart';
 import 'package:water_delivery/view/screens/register_page.dart';
@@ -24,30 +24,30 @@ class HomePage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("9:41",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600)),
-                      Row(
-                        children: [
-                          Icon(Icons.signal_cellular_alt,
-                              color: Colors.white, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.wifi, color: Colors.white, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.battery_full,
-                              color: Colors.white, size: 20),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
+                // const Padding(
+                //   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     children: [
+                //       Text("9:41",
+                //           style: TextStyle(
+                //               color: Colors.white,
+                //               fontSize: 15,
+                //               fontWeight: FontWeight.w600)),
+                //       Row(
+                //         children: [
+                //           Icon(Icons.signal_cellular_alt,
+                //               color: Colors.white, size: 20),
+                //           SizedBox(width: 4),
+                //           Icon(Icons.wifi, color: Colors.white, size: 20),
+                //           SizedBox(width: 4),
+                //           Icon(Icons.battery_full,
+                //               color: Colors.white, size: 20),
+                //         ],
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const Spacer(),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 45),
@@ -80,7 +80,7 @@ class HomePage extends StatelessWidget {
                     children: [
                       SizedBox(
                         width: responsive(context, 318),
-                        height: 60,
+                        height: responsive(context, 60),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
@@ -93,7 +93,10 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const RegisterPage(),
+                                builder: (context) => BlocProvider.value(
+                                  value: context.read<AuthBloc>(),
+                                  child: const RegisterPage(),
+                                ),
                               ),
                             );
                           },
@@ -109,7 +112,7 @@ class HomePage extends StatelessWidget {
                       const SizedBox(height: 12),
                       SizedBox(
                         width: responsive(context, 319),
-                        height: 60,
+                        height: responsive(context, 60),
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.black,
@@ -119,14 +122,16 @@ class HomePage extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => const LoginPage(), // 🔁 فقط الصفحة بدون BlocProvider
-    ),
-  );
-},
-
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BlocProvider.value(
+                                  value: context.read<AuthBloc>(),
+                                  child: const LoginPage(),
+                                ),
+                              ),
+                            );
+                          },
                           child: const Text(
                             "Login",
                             style: TextStyle(

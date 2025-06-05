@@ -1,56 +1,50 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:water_delivery/bloc/product/product_event.dart';
-import 'package:water_delivery/bloc/product/product_state.dart';
-import 'package:water_delivery/repositories/product_repository.dart';
-import 'package:water_delivery/model/company_model.dart';
-import 'package:water_delivery/model/offer_model.dart';
+import 'product_event.dart';
+import 'product_state.dart';
+import '../../service/company_service.dart';
+import '../../service/offer_service.dart';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
-  final ProductRepository repository;
+  final OfferService offerService;
+  final CompanyService companyService;
 
-  List<CompanyModel> companies = [];
-  List<OfferModel> offers = [];
-  int selectedCompanyId = 0;
-
-  ProductBloc({required this.repository}) : super(ProductInitial()) {
+  ProductBloc({
+    required this.offerService,
+    required this.companyService,
+  }) : super(ProductInitial()) {
     on<LoadProducts>(_onLoadProducts);
-    on<FilterProducts>(_onFilterProducts);
+    on<FilterProductsByCompany>(_onFilterProductsByCompany);
   }
 
   Future<void> _onLoadProducts(LoadProducts event, Emitter<ProductState> emit) async {
     emit(ProductLoading());
     try {
-      companies = await repository.fetchCompanies();
-      offers = await repository.fetchOffers(); // All offers
-      selectedCompanyId = 0;
+      final offers = await offerService.fetchOffers();
+      final companies = await companyService.fetchCompanies();
       emit(ProductLoaded(
+        allOffers: offers,
+        filteredOffers: offers,
         companies: companies,
-        offers: offers,
-        selectedCompanyId: selectedCompanyId,
+        selectedCompanyId: 'all',
       ));
     } catch (e) {
-      emit(ProductError(message: e.toString()));
+      emit(ProductError('فشل تحميل البيانات'));
     }
   }
 
-  Future<void> _onFilterProducts(FilterProducts event, Emitter<ProductState> emit) async {
-    emit(ProductLoading());
-    try {
-      selectedCompanyId = int.tryParse(event.query) ?? 0;
-
-      if (selectedCompanyId == 0) {
-        offers = await repository.fetchOffers(); // All
-      } else {
-        offers = await repository.fetchOffers(companyId: selectedCompanyId);
-      }
+  void _onFilterProductsByCompany(FilterProductsByCompany event, Emitter<ProductState> emit) {
+    if (state is ProductLoaded) {
+      final currentState = state as ProductLoaded;
+      final filtered = event.companyId == 'all'
+          ? currentState.allOffers
+          : currentState.allOffers.where((o) => o.companyId == event.companyId).toList();
 
       emit(ProductLoaded(
-        companies: companies,
-        offers: offers,
-        selectedCompanyId: selectedCompanyId,
+        allOffers: currentState.allOffers,
+        filteredOffers: filtered,
+        companies: currentState.companies,
+        selectedCompanyId: event.companyId,
       ));
-    } catch (e) {
-      emit(ProductError(message: e.toString()));
     }
   }
 }

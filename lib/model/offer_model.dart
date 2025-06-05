@@ -1,23 +1,25 @@
 class OfferModel {
-  final int id;
-  final String title; // ← بدل name
+  final String id;
+  final String name;
   final double price;
-  final int companyId;
+  final String companyId;
+  final String description; 
 
   OfferModel({
     required this.id,
-    required this.title,
+    required this.name,
     required this.price,
     required this.companyId,
+    required this.description, 
   });
-  //ليست من الشركات  
 
   factory OfferModel.fromJson(Map<String, dynamic> json) {
     return OfferModel(
-      id: json['id'] ?? 0,
-      title: json['title'] ?? '',
-      price: (json['price'] as num).toDouble(),
-      companyId: json['company_id'] ?? 0,
+      id: json['id'].toString(),
+      name: json['name'] ?? '',
+      price: double.tryParse(json['price'].toString()) ?? 0.0,
+      companyId: json['company_id'].toString(),
+      description: json['description'] ?? '', 
     );
   }
 }

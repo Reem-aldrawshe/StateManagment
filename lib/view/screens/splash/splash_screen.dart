@@ -23,51 +23,45 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-   // final screenWidth = MediaQuery.of(context).size.width;
-   // final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: Color(0xff5DCCFC),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("9:41",
-                          style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
-                      Row(
-                        children: [
-                          Icon(Icons.signal_cellular_alt,
-                              color: Colors.white, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.wifi, color: Colors.white, size: 20),
-                          SizedBox(width: 4),
-                          Icon(Icons.battery_full,
-                              color: Colors.white, size: 20),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 200),
-            Center(
+        child: Center(
+         // crossAxisAlignment: CrossAxisAlignment.start,
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            //   child: Column(
+            //     crossAxisAlignment: CrossAxisAlignment.start,
+            //     children: [
+            //       Row(
+            //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //         children: [
+            //           Text("9:41",
+            //               style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.w600)),
+            //           Row(
+            //             children: [
+            //               Icon(Icons.signal_cellular_alt,
+            //                   color: Colors.white, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.wifi, color: Colors.white, size: 20),
+            //               SizedBox(width: 4),
+            //               Icon(Icons.battery_full,
+            //                   color: Colors.white, size: 20),
+            //             ],
+            //           ),
+            //         ],
+            //       ),
+            //     ],
+            //   ),
+            // ),
+            // const SizedBox(height: 200),
+            
               child: Container(
                  width: responsive(context, 231),
-               // height: 
+                height: responsive(context, 221),
                 child: Image.asset("assets/images/logog.png"),
               ),
             ),
-          ],
-        ),
       ),
     );
   }
